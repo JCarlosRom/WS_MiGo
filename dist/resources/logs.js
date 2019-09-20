@@ -9,9 +9,6 @@ exports.createLogerr = createLogerr;
 // Función para crear logs de errores
 function createLog(results, valoresEntrada, module) {
   //
-  console.log('results: ', results);
-  console.log('valoresEntrada: ', valoresEntrada);
-  console.log('module: ', module);
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
