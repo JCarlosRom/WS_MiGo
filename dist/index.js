@@ -25,10 +25,10 @@ function _main() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _app["default"].listen(_app["default"].get('HTTP_PORT'));
+            return _app["default"].listen(_app["default"].get('HTTP_PORT'), _app["default"].get('SERVER_HOST'));
 
           case 2:
-            console.log('Web service escuchando por puerto', _app["default"].get('HTTP_PORT'));
+            console.log('Web service escuchando por puerto: ' + _app["default"].get('SERVER_HOST') + ':' + _app["default"].get('HTTP_PORT'));
 
           case 3:
           case "end":

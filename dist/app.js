@@ -21,6 +21,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var app = (0, _express["default"])(); // settings
 
+app.set('SERVER_HOST', process.env.SERVER_HOST || '127.0.0.1');
 app.set('HTTP_PORT', process.env.HTTP_PORT || 3000);
 app.set('DB_USER', process.env.DB_USER);
 app.set('DB_HOST', process.env.DB_HOST);
