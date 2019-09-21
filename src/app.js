@@ -13,12 +13,14 @@ app.set('PORT', process.env.PORT);
 
 //importing routes
 import walletRoutes from './routes/billetera';
+import fleetRoutes from './routes/inicio_fleet';
 
 //middlewares
 app.use(morgan('dev'));
 app.use(json());
 
 //routes
-app.use('/webservice', walletRoutes);
+app.use('/billetera', walletRoutes);
+app.use('/inicio_fleet', fleetRoutes);
 
 export default app;
