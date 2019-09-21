@@ -7,7 +7,14 @@ import {
     post_interfaz124_socio_conductor,
     post_interfaz126_socio_no_conductor
 } from '../controllers/inicio_fleet.controller'
+
+//Variable a exportar, la cual contiene las rutas que permiten las peticiones
 const router = Router();
+
+//CONSULTAR RAIZ CON METODO GET inicio_fleet/
+router.get('/', function(req, res){
+    res.send("Web service ejecutandose: módulo Inicio Fleet\n");
+});
 
 /*MIGO PETICIONES
     Todas las peticiones requieren la estructura siguiente para su body:

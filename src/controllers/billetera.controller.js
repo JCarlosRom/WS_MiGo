@@ -1,10 +1,11 @@
 import { pool } from '../database/database';
 import { createLog, createLogerr } from '../resources/logs'
+import { get } from 'http';
 // Librería para encriptar peticiones
 // En la encriptación de tipos INTEGER O DOUBLE PRECISION se hace conversión a string y se encripta
 const aes256 = require('aes256');
 var key = "92AE31A79FEEB2A3";
-const encrypt = 1;
+const encrypt = 0;
 
 export function post_interfaz75_MiBilletera(request, response) {
 
@@ -21,7 +22,19 @@ export function post_interfaz75_MiBilletera(request, response) {
 
     pool.query(
         query, (error, results) => {
-
+            results.rows.forEach(function(element){
+                element.tarjeta_gan = getCentavos(element.tarjeta_gan);
+                element.efectivo_gan = getCentavos(element.efectivo_gan);
+                element.externo_gan = getCentavos(element.externo_gan);
+                element.total_gan = getCentavos(element.total_gan);
+                element.total_gan_dia = getCentavos(element.total_gan_dia);
+                element.cuota_plat_r = getCentavos(element.cuota_plat_r);
+                element.cuota_socio_r = getCentavos(element.cuota_socio_r);
+                element.rango_fechas = getDate(element.rango_fechas);
+                element.ganancia_final = getCentavos(element.ganancia_final);
+                element.out_adeudo_plataforma_efec = getCentavos(element.out_adeudo_plataforma_efec);
+                element.out_adeudo_socio_efec = getCentavos(element.out_adeudo_socio_efec);
+            });
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
                 // El call back se utilizó para dar un tiempo en lo que se crea el log y se envía la información
@@ -81,7 +94,14 @@ export function post_interfaz78_Ganancias(request, response) {
 
     pool.query(
         query, (error, results) => {
-
+            results.rows.forEach(function(element){
+                const fecha_hora = getDateHour(element.out_fecha);
+                element.out_fecha = fecha_hora[0];
+                element.out_hora = fecha_hora[1];
+                element.out_total = getCentavos(element.out_total);
+                element.out_cuota_plat = getCentavos(element.out_cuota_plat);
+                element.out_cuota_socio = getCentavos(element.out_cuota_socio);
+            });
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
                 // El call back se utilizó para dar un tiempo en lo que se crea el log y se envía la información
@@ -89,6 +109,7 @@ export function post_interfaz78_Ganancias(request, response) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_id_tran != null ? element.out_id_tran = aes256.encrypt(key, element.out_id_tran.toString()) : element.out_id_tran = element.out_id_tran;
                             element.out_form_pago != null ? element.out_form_pago = aes256.encrypt(key, element.out_form_pago.toString()) : element.out_form_pago = element.out_form_pago;
                             element.out_id_serv != null ? element.out_id_serv = aes256.encrypt(key, element.out_id_serv.toString()) : element.out_id_serv = element.out_id_serv;
@@ -137,6 +158,13 @@ export function post_interfaz78_2_Ganancias (request, response) {
     pool.query(
         query, (error, results) => {
 
+            results.rows.forEach(function(element){
+                const fecha_hora = getDateHour(element.out_fecha);
+                element.out_fecha = fecha_hora[0];
+                element.out_hora = fecha_hora[1];
+                element.out_total = getCentavos(element.out_total);
+            });
+
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
                 // El call back se utilizó para dar un tiempo en lo que se crea el log y se envía la información
@@ -144,6 +172,7 @@ export function post_interfaz78_2_Ganancias (request, response) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_total != null ? element.out_total = aes256.encrypt(key, element.out_total.toString()) : element.out_total = element.out_total;
                             element.encrypt = true;
                         })
@@ -171,7 +200,7 @@ export function post_interfaz78_2_Ganancias (request, response) {
     )
 }
 
-export function post_interfaz79_Balance(request, response) {
+export function post_interfaz79_Tarjeta(request, response) {
 
     const valoresEntrada={};
     const resultado={};
@@ -187,20 +216,29 @@ export function post_interfaz79_Balance(request, response) {
     pool.query(
         query, (error, results) => {
 
+            results.rows.forEach(function(element){
+                const fecha_hora = getDateHour(element.out_fecha);
+                element.out_fecha = fecha_hora[0];
+                element.out_hora = fecha_hora[1];
+                element.out_total = getCentavos(element.out_total);
+                element.out_cuota_plat = getCentavos(element.out_cuota_plat);
+                element.out_cuota_socio = getCentavos(element.out_cuota_socio);
+            });
+
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
                 // El call back se utilizó para dar un tiempo en lo que se crea el log y se envía la información
                 if (encrypt == 1) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
-                            /*let row_split = element.sp_cinterfaz80_balance.replace('(','').replace(')','').split(',');
-                            let fecha = row_split[0];
-                            let id_servicio = row_split[1];
-                            let ganancia = row_split[2];
-                            delete element.sp_cinterfaz80_balance;
-                            element.out_fecha = aes256.encrypt(key, fecha.toString());
-                            element.out_id_serv = aes256.encrypt(key, id_servicio.toString());
-                            element.out_gan = aes256.encrypt(key, ganancia.toString());*/
+                            element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
+                            element.out_id_tran != null ? element.out_id_tran = aes256.encrypt(key, element.out_id_tran.toString()) : element.out_id_tran = element.out_id_tran;
+                            element.out_form_pago != null ? element.out_form_pago = aes256.encrypt(key, element.out_form_pago.toString()) : element.out_form_pago = element.out_form_pago;
+                            element.out_id_serv != null ? element.out_id_serv = aes256.encrypt(key, element.out_id_serv.toString()) : element.out_id_serv = element.out_id_serv;
+                            element.out_total != null ? element.out_total = aes256.encrypt(key, element.out_total.toString()) : element.out_total = element.out_total;
+                            element.out_cuota_plat != null ? element.out_cuota_plat = aes256.encrypt(key, element.out_cuota_plat.toString()) : element.out_cuota_plat = element.out_cuota_plat;
+                            element.out_cuota_socio != null ? element.out_cuota_socio = aes256.encrypt(key, element.out_cuota_socio.toString()) : element.out_cuota_socio = element.out_cuota_socio;
                             element.encrypt = true;
                         })
                         resultado.data = results.rows;
@@ -227,7 +265,7 @@ export function post_interfaz79_Balance(request, response) {
     )
 }
 
-export function post_interfaz79_2_Balance(request, response) {
+export function post_interfaz79_2_Tarjeta(request, response) {
 
     const valoresEntrada={};
     const resultado={};
@@ -243,6 +281,13 @@ export function post_interfaz79_2_Balance(request, response) {
     pool.query(
         query, (error, results) => {
 
+            results.rows.forEach(function(element){
+                const fecha_hora = getDateHour(element.out_fecha);
+                element.out_fecha = fecha_hora[0];
+                element.out_hora = fecha_hora[1];
+                element.out_total = getCentavos(element.out_total);
+            });
+
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
                 // El call back se utilizó para dar un tiempo en lo que se crea el log y se envía la información
@@ -250,6 +295,7 @@ export function post_interfaz79_2_Balance(request, response) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_total != null ? element.out_total = aes256.encrypt(key, element.out_total.toString()) : element.out_total = element.out_total;
                             element.encrypt = true;
                         })
@@ -277,7 +323,7 @@ export function post_interfaz79_2_Balance(request, response) {
     )
 }
 
-export function post_interfaz80_Balance(request, response) {
+export function post_interfaz80_Tarjeta(request, response) {
 
     const valoresEntrada={};
     const resultado={};
@@ -293,20 +339,22 @@ export function post_interfaz80_Balance(request, response) {
     pool.query(
         query, (error, results) => {
 
+            results.rows.forEach(function(element){
+                const fecha_hora = getDateHour(element.out_fecha);
+                element.out_fecha = fecha_hora[0];
+                element.out_hora = fecha_hora[1];
+                element.out_ganancia = getCentavos(element.out_ganancia);
+            });
+
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
                 // El call back se utilizó para dar un tiempo en lo que se crea el log y se envía la información
                 if (encrypt == 1) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
-                            let row_split = element.sp_cinterfaz80_balance.replace('(','').replace(')','').split(',');
-                            let fecha = row_split[0];
-                            let id_servicio = row_split[1];
-                            let ganancia = row_split[2];
-                            delete element.sp_cinterfaz80_balance;
-                            element.out_fecha = aes256.encrypt(key, fecha.toString());
-                            element.out_id_serv = aes256.encrypt(key, id_servicio.toString());
-                            element.out_gan = aes256.encrypt(key, ganancia.toString());
+                            element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
+                            element.out_ganancia != null ? element.out_ganancia = aes256.encrypt(key, element.out_ganancia.toString()) : element.out_ganancia = element.out_ganancia;
                             element.encrypt = true;
                         })
                         resultado.data = results.rows;
@@ -341,7 +389,7 @@ export function post_interfaz80_Balance(request, response) {
     )
 }
 
-export function post_interfaz80_2_Balance(request, response) {
+export function post_interfaz80_2_Tarjeta(request, response) {
 
     const valoresEntrada={};
     const resultado={};
@@ -357,6 +405,13 @@ export function post_interfaz80_2_Balance(request, response) {
     pool.query(
         query, (error, results) => {
 
+            results.rows.forEach(function(element){
+                const fecha_hora = getDateHour(element.out_fecha);
+                element.out_fecha = fecha_hora[0];
+                element.out_hora = fecha_hora[1];
+                element.out_total = getCentavos(element.out_total);
+            });
+
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
                 // El call back se utilizó para dar un tiempo en lo que se crea el log y se envía la información
@@ -364,6 +419,7 @@ export function post_interfaz80_2_Balance(request, response) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_total != null ? element.out_total = aes256.encrypt(key, element.out_total.toString()) : element.out_total = element.out_total;
                             element.encrypt = true;
                         })
@@ -407,14 +463,27 @@ export function post_interfaz81_verViajes (request, response) {
     pool.query(
         query, (error, results) => {
 
+            results.rows.forEach(function(element){
+                const fecha_hora = getDateHour(element.out_fecha);
+                element.out_fecha = fecha_hora[0];
+                element.out_hora = fecha_hora[1];
+                element.out_total = getCentavos(element.out_total);
+                if(element.out_propina != null){
+                    element.out_propina = getCentavos(element.out_propina);
+                }else{
+                    element.out_propina = '0.00';
+                }
+            });
+
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
                 // El call back se utilizó para dar un tiempo en lo que se crea el log y se envía la información
                 if (encrypt == 1) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
-                            element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
                             element.out_id_serv != null ? element.out_id_serv = aes256.encrypt(key, element.out_id_serv.toString()) : element.out_id_serv = element.out_id_serv;
+                            element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_total != null ? element.out_total = aes256.encrypt(key, element.out_total.toString()) : element.out_total = element.out_total;
                             element.out_origen != null ? element.out_origen = aes256.encrypt(key, element.out_origen.toString()) : element.out_origen = element.out_origen;
                             element.out_destino != null ? element.out_destino = aes256.encrypt(key, element.out_destino.toString()) : element.out_destino = element.out_destino;
@@ -445,6 +514,73 @@ export function post_interfaz81_verViajes (request, response) {
     )
 }
 
-/*function getDateHour(fecha_hora){
+function getCentavos(numberValue) {
+    console.log(numberValue);
+    let valueString = numberValue.toString();
+    let split_numberValue = valueString.split('.');
 
-}*/
+    if(split_numberValue.length > 1){
+        outValue = numberValue + '0';
+    }else{
+        outValue = numberValue + '.00';
+    }
+    return outValue;
+}
+
+function getDate(date){
+    let split_fechas = date.split('-');
+    let primer_mes = split_fechas[1];
+    let primer_dia = split_fechas[2];
+    let segundo_mes = split_fechas[4];
+    let segundo_dia = split_fechas[5];
+
+    primer_mes = getMonth(primer_mes);
+    segundo_mes = getMonth(segundo_mes);
+
+    const fechas = primer_dia + " de " + primer_mes + " - " + segundo_dia + " de " + segundo_mes;
+    return fechas;
+}
+
+function getMonth(mes) {
+    switch (mes) {
+        case '01':
+            return 'ene';
+        case '02':
+            return 'feb';
+        case '03':
+            return 'mar';
+        case '04':
+            return 'abr';
+        case '05':
+            return 'may';
+        case '06':
+            return 'jun';
+        case '07':
+            return 'jul';
+        case '08':
+            return 'ago';
+        case '09':
+            return 'sep';
+        case '10':
+            return 'oct';
+        case '11':
+            return 'nov';
+        case '12':
+            return 'dic';
+    }
+}
+
+function getDateHour(date){
+    const fech_aux = date;
+    const fech_split = fech_aux.split("T");
+    const fecha_completa = fech_split[0];
+    const hora_completa = fech_split[1];
+    const fecha_completa_split = fecha_completa.split("-");
+    const fecha_final = fecha_completa_split[2] + "/" + fecha_completa_split[1];
+    const hora_completa_split = hora_completa.split(":");
+    const hora_final = hora_completa_split[0] + ":" + hora_completa_split[1];
+
+    const return_obj = [fecha_final, hora_final]
+
+    return return_obj;
+}

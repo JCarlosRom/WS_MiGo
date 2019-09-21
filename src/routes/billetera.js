@@ -3,17 +3,18 @@ import {
     post_interfaz75_MiBilletera,
     post_interfaz78_Ganancias,
     post_interfaz78_2_Ganancias,
-    post_interfaz79_Balance,
-    post_interfaz79_2_Balance,
-    post_interfaz80_Balance,
-    post_interfaz80_2_Balance,
+    post_interfaz79_Tarjeta,
+    post_interfaz79_2_Tarjeta,
+    post_interfaz80_Tarjeta,
+    post_interfaz80_2_Tarjeta,
     post_interfaz81_verViajes
 } from '../controllers/billetera.controller'
+
 const router = Router();
 
-//CONSULTAR RAIZ CON METODO GET
+//CONSULTAR RAIZ CON METODO GET billetera/
 router.get('/', function(req, res){
-    res.send("Web service ejecutandose\n");
+    res.send("Web service ejecutandose: módulo Mi Billetera\n");
 });
 
 /*MIGO PETICIONES
@@ -34,17 +35,17 @@ router.post('/interfaz_78/ganancias', post_interfaz78_Ganancias);
 // billetera/interfaz_78_2/ganancias
 router.post('/interfaz_78_2/ganancias', post_interfaz78_2_Ganancias);
 
-// billetera/interfaz_79/balance
-router.post('/interfaz_79/balance', post_interfaz79_Balance);
+// billetera/interfaz_79/tarjeta
+router.post('/interfaz_79/tarjeta', post_interfaz79_Tarjeta);
 
-// billetera/interfaz_79_2/balance
-router.post('/interfaz_79_2/balance', post_interfaz79_2_Balance);
+// billetera/interfaz_79_2/tarjeta
+router.post('/interfaz_79_2/tarjeta', post_interfaz79_2_Tarjeta);
 
-// billetera/interfaz_80/balance
-router.post('/interfaz_80/balance', post_interfaz80_Balance);
+// billetera/interfaz_80/tarjeta
+router.post('/interfaz_80/tarjeta', post_interfaz80_Tarjeta);
 
-// billetera/interfaz_80_2/balance
-router.post('/interfaz_80_2/balance', post_interfaz80_2_Balance);
+// billetera/interfaz_80_2/tarjeta
+router.post('/interfaz_80_2/tarjeta', post_interfaz80_2_Tarjeta);
 
 // billetera/interfaz_81/verviajes
 router.post('/interfaz_81/verviajes', post_interfaz81_verViajes);

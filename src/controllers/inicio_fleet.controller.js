@@ -177,16 +177,16 @@ export function post_interfaz121_tiempo_real(request, response) {
                         resultado.data = results.rows;
                         response.status(200).json(resultado);
                         // Creación de log
-                        createLog(resultado,valoresEntrada ,"ws_consultar_socio_conductor");
+                        createLog(resultado,valoresEntrada ,"ws_consultar_tiempo_real");
                     }, 100);
                 } else {
                     resultado.datos = results.rows;
                     response.status(200).json(resultado);
                     // Creación de log
-                    createLog(resultado, valoresEntrada, "ws_consultar_socio_conductor");
+                    createLog(resultado, valoresEntrada, "ws_consultar_tiempo_real");
                 }
             } catch (error) {
-                createLogerr(error, valoresEntrada,"ws_consultar_socio_conductor");
+                createLogerr(error, valoresEntrada,"ws_consultar_tiempo_real");
                 response.status(404).json({ msg: "015, “No se estableció conexión con la base de datos de monedero”" });
             }
 
@@ -242,7 +242,7 @@ export function post_interfaz124_socio_conductor(request, response) {
     )
 }
 
-//interfaz 126 socio conductor
+//interfaz 126 socio no conductor
 export function post_interfaz126_socio_no_conductor(request, response) {
 
     const valoresEntrada={};
@@ -288,6 +288,3 @@ export function post_interfaz126_socio_no_conductor(request, response) {
 
     )
 }
-
-
-//Método para inicio fleet por semana
