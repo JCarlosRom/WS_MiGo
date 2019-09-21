@@ -11,6 +11,8 @@ var _morgan = _interopRequireDefault(require("morgan"));
 
 var _billetera = _interopRequireDefault(require("./routes/billetera"));
 
+var _inicio_fleet = _interopRequireDefault(require("./routes/inicio_fleet"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -30,6 +32,7 @@ app.set('PORT', process.env.PORT); //importing routes
 app.use((0, _morgan["default"])('dev'));
 app.use((0, _express.json)()); //routes
 
-app.use('/webservice', _billetera["default"]);
+app.use('/billetera', _billetera["default"]);
+app.use('/inicio_fleet', _inicio_fleet["default"]);
 var _default = app;
 exports["default"] = _default;
