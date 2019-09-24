@@ -10,6 +10,7 @@ import {
     post_interfaz81_verViajes
 } from '../controllers/billetera.controller'
 
+//Variable a exportar, la cual contiene las rutas que permiten las peticiones
 const router = Router();
 
 //CONSULTAR RAIZ CON METODO GET billetera/

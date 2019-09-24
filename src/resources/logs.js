@@ -1,4 +1,12 @@
 // Función para crear logs de errores
+/**
+ *
+ *
+ * @export
+ * @param {*} results
+ * @param {*} valoresEntrada
+ * @param {*} module
+ */
 export function createLog(results, valoresEntrada, module) { //
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -38,6 +46,14 @@ export function createLog(results, valoresEntrada, module) { //
 };
 
 // Función para crear logs de peticiones: createLog(resultado, modulo de petición)
+/**
+ *
+ *
+ * @export
+ * @param {*} results
+ * @param {*} valoresEntrada
+ * @param {*} module
+ */
 export function createLogerr( results, valoresEntrada, module) { //
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
