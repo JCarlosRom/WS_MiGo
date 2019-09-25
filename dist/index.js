@@ -12,6 +12,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 require('dotenv').config();
 
+//Método principal que ejecuta la aplicación como servidar
 function main() {
   return _main.apply(this, arguments);
 }

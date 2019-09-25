@@ -29,13 +29,11 @@ router.get('/', function (req, res) {
     }
 
 */
-// inicio_fleet/interfaz41/fleet_home
+// inicio_fleet/interfaz_41/fleet_home
 
-router.post('/interfaz_41/fleet_home', _inicio_fleet.post_interfaz41_fleet_home); // inicio_fleet/interfaz42/fleet_home_2
+router.post('/interfaz_41/fleet_home', _inicio_fleet.post_interfaz41_fleet_home); // inicio_fleet/interfaz_42/fleet_home (filtro)
 
-router.post('/interfaz_42/fleet_home_2', _inicio_fleet.post_interfaz42_fleet_home); // inicio_fleet/interfaz42/fleet_home_2_filtro
-
-router.post('/interfaz_42/fleet_home_2_filtro', _inicio_fleet.post_interfaz42_fleet_home_filtro); // inicio_fleet/interfaz121/tiempo_real
+router.post('/interfaz_42/fleet_home', _inicio_fleet.post_interfaz42_fleet_home); // inicio_fleet/interfaz_121/tiempo_real
 
 router.post('/interfaz_121/tiempo_real', _inicio_fleet.post_interfaz121_tiempo_real); // inicio_fleet/interfaz_124/socio_conductor
 

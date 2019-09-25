@@ -19,19 +19,20 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var app = (0, _express["default"])(); // settings
+//Variable que contiene la aplicación del framework express
+var app = (0, _express["default"])(); // Configuración en las variables de entorno
 
 app.set('SERVER_HOST', process.env.SERVER_HOST || '127.0.0.1');
-app.set('HTTP_PORT', process.env.HTTP_PORT || 3000);
+app.set('HTTP_PORT', process.env.HTTP_PORT || 3001);
 app.set('DB_USER', process.env.DB_USER);
 app.set('DB_HOST', process.env.DB_HOST);
 app.set('DB', process.env.DB);
 app.set('DB_PASS', process.env.DB_PASS);
-app.set('PORT', process.env.PORT); //importing routes
+app.set('PORT', process.env.PORT); //importación de las rutas
 
 //middlewares
 app.use((0, _morgan["default"])('dev'));
-app.use((0, _express.json)()); //routes
+app.use((0, _express.json)()); //rutas raíz
 
 app.use('/billetera', _billetera["default"]);
 app.use('/inicio_fleet', _inicio_fleet["default"]);

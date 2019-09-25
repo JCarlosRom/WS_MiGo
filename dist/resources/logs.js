@@ -7,6 +7,15 @@ exports.createLog = createLog;
 exports.createLogerr = createLogerr;
 
 // Función para crear logs de errores
+
+/**
+ *
+ *
+ * @export
+ * @param {*} results
+ * @param {*} valoresEntrada
+ * @param {*} module
+ */
 function createLog(results, valoresEntrada, module) {
   //
   var today = new Date();
@@ -49,6 +58,15 @@ function createLog(results, valoresEntrada, module) {
 }
 
 ; // Función para crear logs de peticiones: createLog(resultado, modulo de petición)
+
+/**
+ *
+ *
+ * @export
+ * @param {*} results
+ * @param {*} valoresEntrada
+ * @param {*} module
+ */
 
 function createLogerr(results, valoresEntrada, module) {
   //
