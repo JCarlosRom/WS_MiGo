@@ -37,7 +37,7 @@ export function post_interfaz75_MiBilletera(request, response) {
     pool.query(
         query, (error, results) => {
             results.rows.forEach(function(element){
-                const sp_split = element.sp_cinterfaz75_mibilletera.replace('(', '').replace(')', '').split(',');
+                /*const sp_split = element.sp_cinterfaz75_mibilletera.replace('(', '').replace(')', '').split(',');
 
                 element.tarjeta_gan = getCentavos(sp_split[0]);
                 element.efectivo_gan = getCentavos(sp_split[1]);
@@ -52,9 +52,9 @@ export function post_interfaz75_MiBilletera(request, response) {
                 element.out_adeudo_plataforma_efec = getCentavos(sp_split[10]);
                 element.out_adeudo_socio_efec = getCentavos(sp_split[11]);
 
-                delete element.sp_cinterfaz75_mibilletera;
+                delete element.sp_cinterfaz75_mibilletera;*/
 
-                /*element.tarjeta_gan = getCentavos(element.tarjeta_gan);
+                element.tarjeta_gan = getCentavos(element.tarjeta_gan);
                 element.efectivo_gan = getCentavos(element.efectivo_gan);
                 element.externo_gan = getCentavos(element.externo_gan);
                 element.total_gan = getCentavos(element.total_gan);
@@ -62,9 +62,10 @@ export function post_interfaz75_MiBilletera(request, response) {
                 element.cuota_plat_r = getCentavos(element.cuota_plat_r);
                 element.cuota_socio_r = getCentavos(element.cuota_socio_r);
                 element.rango_fechas = getDate(element.rango_fechas);
+                element.cant_servicios = element.cant_servicios.toString();
                 element.ganancia_final = getCentavos(element.ganancia_final);
                 element.out_adeudo_plataforma_efec = getCentavos(element.out_adeudo_plataforma_efec);
-                element.out_adeudo_socio_efec = getCentavos(element.out_adeudo_socio_efec);*/
+                element.out_adeudo_socio_efec = getCentavos(element.out_adeudo_socio_efec);
             });
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
@@ -133,7 +134,7 @@ export function post_interfaz78_Ganancias(request, response) {
     pool.query(
         query, (error, results) => {
             results.rows.forEach(function(element){
-                const sp_split = element.sp_cinterfaz78_ganacias.replace('(', '').replace(')', '').split(',');
+                /*const sp_split = element.sp_cinterfaz78_ganacias.replace('(', '').replace(')', '').split(',');
 
                 element.out_fecha = getThisDate(sp_split[0]);
                 element.out_id_tran = sp_split[1];
@@ -143,14 +144,17 @@ export function post_interfaz78_Ganancias(request, response) {
                 element.out_cuota_plat = getCentavos(sp_split[5]);
                 element.out_cuota_socio = getCentavos(sp_split[6]);
 
-                delete element.sp_cinterfaz78_ganacias;
+                delete element.sp_cinterfaz78_ganacias;*/
 
-                /*const fecha_hora = getDateHour(element.sp_split[0]);
+                const fecha_hora = getDateHour(element.sp_split[0]);
                 element.out_fecha = fecha_hora[0];
                 element.out_hora = fecha_hora[1];
+                element.out_id_tran = element.out_id_tran.toString();
+                element.out_form_pago = element.out_form_pago.toString();
+                element.out_id_serv = element.out_id_serv.toString();
                 element.out_total = getCentavos(element.out_total);
                 element.out_cuota_plat = getCentavos(element.out_cuota_plat);
-                element.out_cuota_socio = getCentavos(element.out_cuota_socio);*/
+                element.out_cuota_socio = getCentavos(element.out_cuota_socio);
             });
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
@@ -159,7 +163,7 @@ export function post_interfaz78_Ganancias(request, response) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
-                            //element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_id_tran != null ? element.out_id_tran = aes256.encrypt(key, element.out_id_tran.toString()) : element.out_id_tran = element.out_id_tran;
                             element.out_form_pago != null ? element.out_form_pago = aes256.encrypt(key, element.out_form_pago.toString()) : element.out_form_pago = element.out_form_pago;
                             element.out_id_serv != null ? element.out_id_serv = aes256.encrypt(key, element.out_id_serv.toString()) : element.out_id_serv = element.out_id_serv;
@@ -216,17 +220,17 @@ export function post_interfaz78_2_Ganancias (request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function(element){
-                const sp_split = element.sp_cinterfaz78_2_ganancias.replace('(', '').replace(')', '').split(',');
+                /*const sp_split = element.sp_cinterfaz78_2_ganancias.replace('(', '').replace(')', '').split(',');
 
                 element.out_fecha = getThisDate(sp_split[0]);
                 element.out_total = getCentavos(sp_split[1]);
 
-                delete element.sp_cinterfaz78_2_ganancias;
+                delete element.sp_cinterfaz78_2_ganancias;*/
 
-                /*const fecha_hora = getDateHour(element.out_fecha);
+                const fecha_hora = getDateHour(element.out_fecha);
                 element.out_fecha = fecha_hora[0];
                 element.out_hora = fecha_hora[1];
-                element.out_total = getCentavos(element.out_total);*/
+                element.out_total = getCentavos(element.out_total);
             });
 
             try {
@@ -236,7 +240,7 @@ export function post_interfaz78_2_Ganancias (request, response) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
-                            //element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_total != null ? element.out_total = aes256.encrypt(key, element.out_total.toString()) : element.out_total = element.out_total;
                             element.encrypt = true;
                         })
@@ -288,7 +292,7 @@ export function post_interfaz79_Tarjeta(request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function(element){
-                const sp_split = element.sp_cinterfaz79_balance.replace('(', '').replace(')', '').split(',');
+                /*const sp_split = element.sp_cinterfaz79_balance.replace('(', '').replace(')', '').split(',');
 
                 element.out_fecha = getThisDate(sp_split[0]);
                 element.out_id_tran = sp_split[1];
@@ -298,13 +302,17 @@ export function post_interfaz79_Tarjeta(request, response) {
                 element.out_cuota_plat = getCentavos(sp_split[5]);
                 element.out_cuota_socio = getCentavos(sp_split[6]);
 
-                delete element.sp_cinterfaz79_balance;
-                /*const fecha_hora = getDateHour(element.out_fecha);
+                delete element.sp_cinterfaz79_balance;*/
+
+                const fecha_hora = getDateHour(element.out_fecha);
                 element.out_fecha = fecha_hora[0];
                 element.out_hora = fecha_hora[1];
+                element.out_id_tran = element.out_id_tran.toString();
+                element.out_form_pago = element.out_form_pago.toString();
+                element.out_id_serv = element.out_id_serv.toString();
                 element.out_total = getCentavos(element.out_total);
                 element.out_cuota_plat = getCentavos(element.out_cuota_plat);
-                element.out_cuota_socio = getCentavos(element.out_cuota_socio);*/
+                element.out_cuota_socio = getCentavos(element.out_cuota_socio);
             });
 
             try {
@@ -314,7 +322,7 @@ export function post_interfaz79_Tarjeta(request, response) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
-                            //element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_id_tran != null ? element.out_id_tran = aes256.encrypt(key, element.out_id_tran.toString()) : element.out_id_tran = element.out_id_tran;
                             element.out_form_pago != null ? element.out_form_pago = aes256.encrypt(key, element.out_form_pago.toString()) : element.out_form_pago = element.out_form_pago;
                             element.out_id_serv != null ? element.out_id_serv = aes256.encrypt(key, element.out_id_serv.toString()) : element.out_id_serv = element.out_id_serv;
@@ -371,19 +379,17 @@ export function post_interfaz79_2_Tarjeta(request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function(element){
-                console.log(element);
-                const sp_split = element.sp_cinterfaz79_2_balance.replace('(','').replace(')','').split(',');
+                /*const sp_split = element.sp_cinterfaz79_2_balance.replace('(','').replace(')','').split(',');
 
                 element.out_fecha = getThisDate(sp_split[0]);
                 element.out_total = getCentavos(sp_split[1]);
 
-                delete element.sp_cinterfaz79_2_balance;
+                delete element.sp_cinterfaz79_2_balance;*/
 
-                /*const fecha_hora = getDateHourFullDate(element.out_fecha.toString());
                 const fecha_hora = getDateHour(element.out_fecha);
                 element.out_fecha = fecha_hora[0];
                 element.out_hora = fecha_hora[1];
-                element.out_total = getCentavos(element.out_total);*/
+                element.out_total = getCentavos(element.out_total);
             });
 
             try {
@@ -393,7 +399,7 @@ export function post_interfaz79_2_Tarjeta(request, response) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
-                            //element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_total != null ? element.out_total = aes256.encrypt(key, element.out_total.toString()) : element.out_total = element.out_total;
                             element.encrypt = true;
                         })
@@ -445,18 +451,19 @@ export function post_interfaz80_Tarjeta(request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function(element){
-                const sp_split = element.sp_cinterfaz80_balance.replace('(', '').replace(')', '').split(',');
+                /*const sp_split = element.sp_cinterfaz80_balance.replace('(', '').replace(')', '').split(',');
 
                 element.out_fecha = getThisDate(sp_split[0]);
                 element.out_id_serv = sp_split[1];
                 element.out_ganancia = getCentavos(sp_split[2]);
 
-                delete element.sp_cinterfaz80_balance;
+                delete element.sp_cinterfaz80_balance;*/
 
-                /*const fecha_hora = getDateHour(element.out_fecha);
+                const fecha_hora = getDateHour(element.out_fecha);
                 element.out_fecha = fecha_hora[0];
                 element.out_hora = fecha_hora[1];
-                element.out_ganancia = getCentavos(element.out_ganancia);*/
+                element.out_id_servicio = element.out_id_servicio.toString();
+                element.out_ganancia = getCentavos(element.out_ganancia);
             });
 
             try {
@@ -519,15 +526,16 @@ export function post_interfaz80_2_Tarjeta(request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function(element){
-                const sp_split = element.sp_cinterfaz80_2_balance.replace('(', '').replace(')', '').split(',');
+                /*const sp_split = element.sp_cinterfaz80_2_balance.replace('(', '').replace(')', '').split(',');
                 element.out_fecha = getThisDate(sp_split[0]);
                 element.out_total = getCentavos(sp_split[1]);
 
-                delete element.sp_cinterfaz80_2_balance;
-                /*const fecha_hora = getDateHour(element.out_fecha);
+                delete element.sp_cinterfaz80_2_balance;*/
+
+                const fecha_hora = getDateHour(element.out_fecha);
                 element.out_fecha = fecha_hora[0];
                 element.out_hora = fecha_hora[1];
-                element.out_total = getCentavos(element.out_total);*/
+                element.out_total = getCentavos(element.out_total);
             });
 
             try {
@@ -537,7 +545,7 @@ export function post_interfaz80_2_Tarjeta(request, response) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
-                            //element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
+                            element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_total != null ? element.out_total = aes256.encrypt(key, element.out_total.toString()) : element.out_total = element.out_total;
                             element.encrypt = true;
                         })
@@ -590,7 +598,7 @@ export function post_interfaz81_verViajes (request, response) {
 
             results.rows.forEach(function(element){
 
-                const sp_split = element.sp_cinterfaz81_verviajes.replace('(','').replace(')','').replace('\\','').split(',');
+                /*const sp_split = element.sp_cinterfaz81_verviajes.replace('(','').replace(')','').replace('\\','').split(',');
                 element.out_id_tran = sp_split[0];
 
                 const fecha_hora = getDateHour(sp_split[1].replace('"', ''));
@@ -606,17 +614,15 @@ export function post_interfaz81_verViajes (request, response) {
                 const estado_servicio = sp_split[9].replace('\"', '');
                 element.out_estado_servicio = estado_servicio.replace('\"','');
 
-                delete element.sp_cinterfaz81_verviajes;
+                delete element.sp_cinterfaz81_verviajes;*/
 
-                /*const fecha_hora = getDateHour(element.out_fecha);
+                element.id_transaccion = element.id_transaccion.toString();
+                const fecha_hora = getDateHour(element.out_fecha);
+                element.out_id_serv = element.out_id_serv.toString();
                 element.out_fecha = fecha_hora[0];
                 element.out_hora = fecha_hora[1];
                 element.out_total = getCentavos(element.out_total);
-                if(element.out_propina != null){
-                    element.out_propina = getCentavos(element.out_propina);
-                }else{
-                    element.out_propina = '0.00';
-                }*/
+                element.out_propina = getCentavos(element.out_propina);
             });
 
             try {
@@ -625,7 +631,7 @@ export function post_interfaz81_verViajes (request, response) {
                 if (encrypt) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
-                            element.out_id_tran != null ? element.out_id_tran = aes256.encrypt(key, element.out_id_tran.toString()) : element.out_id_tran = element.out_id_tran;
+                            element.id_transaccion != null ? element.id_transaccion = aes256.encrypt(key, element.id_transaccion.toString()) : element.id_transaccion = element.id_transaccion;
                             element.out_fecha != null ? element.out_fecha = aes256.encrypt(key, element.out_fecha.toString()) : element.out_fecha = element.out_fecha;
                             element.out_hora != null ? element.out_hora = aes256.encrypt(key, element.out_hora.toString()) : element.out_hora = element.out_hora;
                             element.out_id_serv != null ? element.out_id_serv = aes256.encrypt(key, element.out_id_serv.toString()) : element.out_id_serv = element.out_id_serv;

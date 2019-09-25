@@ -10,7 +10,7 @@ var aes256 = require('aes256');
 var key = "92AE31A79FEEB2A3";
 const encrypt = false;
 
-//interfaz 41 home fleet
+// interfaz 41 home fleet sin filtro
 /**
  *
  *
@@ -27,79 +27,6 @@ export function post_interfaz41_fleet_home(request, response) {
     valoresEntrada.id_usuario = id_usuario;
 
     // Query
-    var query = "select interfaz41fleethome('"+id_usuario+"')";
-    // Se reemplaza las comillas doble por simples para la consulta
-    query = query.replace(/["]+/g, '');
-
-    pool.query(
-        query, (error, results) => {
-
-            results.rows.forEach(function(element){
-                const sp_split = element.interfaz41fleethome.replace('\"', '').replace('(', '').replace(')', '').split(',');
-                //element.out_id_tran = sp_split[0];
-                element.out_nombre = sp_split[0].replace('\"', '');
-                element.out_total_semanal = getCentavos(sp_split[1]);
-                element.out_numero_viajes = sp_split[2];
-                element.out_cuota_plat = getCentavos(sp_split[3]);
-                element.out_cuota_socio = getCentavos(sp_split[4]);
-
-                delete element.interfaz41fleethome;
-            });
-
-            try {
-                // Call back pata encriptar cada elemento de la respuesta para envío1
-                // El call back se utilizó para dar un tiempo en lo que se crea el log y se envía la información
-                if (encrypt) {
-                    setTimeout(function () {
-                        results.rows.forEach(function (element) {
-                            element.out_nombre != null ? element.out_nombre = aes256.encrypt(key, element.out_nombre.toString()) : element.out_nombre = element.out_nombre;
-                            element.out_total_semanal != null ? element.out_total_semanal = aes256.encrypt(key, element.out_total_semanal.toString()) : element.out_total_semanal = element.out_total_semanal;
-                            element.out_numero_viajes != null ? element.out_numero_viajes = aes256.encrypt(key, element.out_numero_viajes.toString()) : element.out_numero_viajes = element.out_numero_viajes;
-                            element.out_cuota_plat != null ? element.out_cuota_plat = aes256.encrypt(key, element.out_cuota_plat.toString()) : element.out_cuota_plat = element.out_cuota_plat;
-                            element.out_cuota_socio != null ? element.out_cuota_socio = aes256.encrypt(key, element.out_cuota_socio.toString()) : element.out_cuota_socio = element.out_cuota_socio;
-                            element.encrypt = true;
-                        })
-                        resultado.data = results.rows;
-                        response.status(200).json(resultado);
-                        // Creación de log
-                        createLog(resultado,valoresEntrada ,"ws_consultar_inicio_fleet");
-                    }, 100);
-                } else {
-                    results.rows.forEach(function (element) {
-                        element.encrypt = false;
-                    })
-                    resultado.datos = results.rows;
-                    response.status(200).json(resultado);
-                    // Creación de log
-                    createLog(resultado, valoresEntrada, "ws_consultar_inicio_fleet");
-                }
-            } catch (error) {
-                createLogerr(error, valoresEntrada,"ws_consultar_inicio_fleet");
-                response.status(404).json({ msg: "015, “No se estableció conexión con la base de datos de monedero”" });
-            }
-
-        }
-
-    )
-}
-
-// interfaz 41 home fleet sin filtro
-/**
- *
- *
- * @export
- * @param {*} request
- * @param {*} response
- */
-export function post_interfaz42_fleet_home(request, response) {
-
-    const valoresEntrada={};
-    const resultado={};
-    // Variables de entrada
-    const { id_usuario } = request.body;
-    valoresEntrada.id_usuario = id_usuario;
-
-    // Query
     var query = "select interfaz41FleetHome3('"+id_usuario+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
@@ -108,16 +35,22 @@ export function post_interfaz42_fleet_home(request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function (element) {
-                const sp_split = element.interfaz41fleethome3.replace('\"', '').replace('(', '').replace(')', '').split(',');
+                /*const sp_split = element.interfaz41fleethome3.replace('\"', '').replace('(', '').replace(')', '').split(',');
 
-                element.out_id_usuario = sp_split[0];
-                element.out_nombre = sp_split[1].replace('\"', '');
-                element.out_ganancia_semanal = getCentavos(sp_split[2]);
-                element.out_ganancia_actual = getCentavos(sp_split[3]);
-                element.out_numero_viajes = sp_split[4];
-                element.out_rango_fechas = getRangeDate(sp_split[5]);
+                element.id_chofer = sp_split[0];
+                element.nombre = sp_split[1].replace('\"', '');
+                element.ganancia_semanal = getCentavos(sp_split[2]);
+                element.ganancia_actual = getCentavos(sp_split[3]);
+                element.numero_viajes_actual = sp_split[4];
+                element.rango_fechas = getRangeDate(sp_split[5]);
 
-                delete element.interfaz41fleethome3;
+                delete element.interfaz41fleethome3;*/
+
+                element.id_chofer = element.id_chofer.toString();
+                element.ganancia_semanal = getCentavos(element.ganancia_semanal);
+                element.ganancia_actual = getCentavos(element.ganancia_actual);
+                element.numero_viajes_actual = element.numero_viajes_actual.toString();
+                element.rango_fechas = getRangeDate(element.rango_fechas);
             });
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
@@ -125,12 +58,12 @@ export function post_interfaz42_fleet_home(request, response) {
                 if (encrypt) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
-                            element.out_id_usuario != null ? element.out_id_usuario = aes256.encrypt(key, element.out_id_usuario.toString()) : element.out_id_usuario = element.out_id_usuario;
-                            element.out_nombre != null ? element.out_nombre = aes256.encrypt(key, element.out_nombre.toString()) : element.out_nombre = element.out_nombre;
-                            element.out_ganancia_semanal != null ? element.out_ganancia_semanal = aes256.encrypt(key, element.out_ganancia_semanal.toString()) : element.out_ganancia_semanal = element.out_ganancia_semanal;
-                            element.out_ganancia_actual != null ? element.out_ganancia_actual = aes256.encrypt(key, element.out_ganancia_actual.toString()) : element.out_ganancia_actual = element.out_ganancia_actual;
-                            element.out_numero_viajes != null ? element.out_numero_viajes = aes256.encrypt(key, element.out_numero_viajes.toString()) : element.out_numero_viajes = element.out_numero_viajes;
-                            element.out_rango_fechas != null ? element.out_rango_fechas = aes256.encrypt(key, element.out_rango_fechas.toString()) : element.out_rango_fechas = element.out_rango_fechas;
+                            element.id_chofer != null ? element.id_chofer = aes256.encrypt(key, element.id_chofer.toString()) : element.id_chofer = element.id_chofer;
+                            element.nombre != null ? element.nombre = aes256.encrypt(key, element.nombre.toString()) : element.nombre = element.nombre;
+                            element.ganancia_semanal != null ? element.ganancia_semanal = aes256.encrypt(key, element.ganancia_semanal.toString()) : element.ganancia_semanal = element.ganancia_semanal;
+                            element.ganancia_actual != null ? element.ganancia_actual = aes256.encrypt(key, element.ganancia_actual.toString()) : element.ganancia_actual = element.ganancia_actual;
+                            element.numero_viajes_actual != null ? element.numero_viajes_actual = aes256.encrypt(key, element.numero_viajes_actual.toString()) : element.numero_viajes_actual = element.numero_viajes_actual;
+                            element.rango_fechas != null ? element.rango_fechas = aes256.encrypt(key, element.rango_fechas.toString()) : element.rango_fechas = element.rango_fechas;
                             element.encrypt = true;
                         });
                         resultado.data = results.rows;
@@ -165,7 +98,7 @@ export function post_interfaz42_fleet_home(request, response) {
  * @param {*} request
  * @param {*} response
  */
-export function post_interfaz42_fleet_home_filtro(request, response) {
+export function post_interfaz42_fleet_home(request, response) {
 
     const valoresEntrada={};
     const resultado={};
@@ -182,8 +115,8 @@ export function post_interfaz42_fleet_home_filtro(request, response) {
     pool.query(
         query, (error, results) => {
 
-            /*results.rows.forEach(function (element) {
-                const sp_split = element.interfaz41fleethome3_filtro.replace('\"', '').replace('(', '').replace(')', '').split(',');
+            results.rows.forEach(function (element) {
+                /*const sp_split = element.interfaz41fleethome3_filtro.replace('\"', '').replace('(', '').replace(')', '').split(',');
 
                 element.out_id_usuario = sp_split[0];
                 element.out_nombre = sp_split[1].replace('\"', '');
@@ -192,8 +125,14 @@ export function post_interfaz42_fleet_home_filtro(request, response) {
                 element.out_numero_viajes = sp_split[4];
                 element.out_rango_fechas = getRangeDate(sp_split[5]);
 
-                delete element.interfaz41fleethome3_filtro;
-            });*/
+                delete element.interfaz41fleethome3_filtro;*/
+
+                element.id_chofer = element.id_chofer.toString();
+                element.ganancia_semanal = getCentavos(element.ganancia_semanal);
+                element.ganancia_actual = getCentavos(element.ganancia_actual);
+                element.numero_viajes_actual = element.numero_viajes_actual.toString();
+                element.rango_fechas = getRangeDate(element.rango_fechas);
+            });
 
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
@@ -201,14 +140,12 @@ export function post_interfaz42_fleet_home_filtro(request, response) {
                 if (encrypt) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
-                            /*
-                            element.out_id_usuario != null ? element.out_id_usuario = aes256.encrypt(key, element.out_id_usuario.toString()) : element.out_id_usuario = element.out_id_usuario;
-                            element.out_nombre != null ? element.out_nombre = aes256.encrypt(key, element.out_nombre.toString()) : element.out_nombre = element.out_nombre;
-                            element.out_ganancia_semanal != null ? element.out_ganancia_semanal = aes256.encrypt(key, element.out_ganancia_semanal.toString()) : element.out_ganancia_semanal = element.out_ganancia_semanal;
-                            element.out_ganancia_actual != null ? element.out_ganancia_actual = aes256.encrypt(key, element.out_ganancia_actual.toString()) : element.out_ganancia_actual = element.out_ganancia_actual;
-                            element.out_numero_viajes != null ? element.out_numero_viajes = aes256.encrypt(key, element.out_numero_viajes.toString()) : element.out_numero_viajes = element.out_numero_viajes;
-                            element.out_rango_fechas != null ? element.out_rango_fechas = aes256.encrypt(key, element.out_rango_fechas.toString()) : element.out_rango_fechas = element.out_rango_fechas;
-                            */
+                            element.id_chofer != null ? element.id_chofer = aes256.encrypt(key, element.id_chofer.toString()) : element.id_chofer = element.id_chofer;
+                            element.nombre != null ? element.nombre = aes256.encrypt(key, element.nombre.toString()) : element.nombre = element.nombre;
+                            element.ganancia_semanal != null ? element.ganancia_semanal = aes256.encrypt(key, element.ganancia_semanal.toString()) : element.ganancia_semanal = element.ganancia_semanal;
+                            element.ganancia_actual != null ? element.ganancia_actual = aes256.encrypt(key, element.ganancia_actual.toString()) : element.ganancia_actual = element.ganancia_actual;
+                            element.numero_viajes_actual != null ? element.numero_viajes_actual = aes256.encrypt(key, element.numero_viajes_actual.toString()) : element.numero_viajes_actual = element.numero_viajes_actual;
+                            element.rango_fechas != null ? element.rango_fechas = aes256.encrypt(key, element.rango_fechas.toString()) : element.rango_fechas = element.rango_fechas;
                             element.encrypt = true;
                         });
                         resultado.data = results.rows;
@@ -260,7 +197,7 @@ export function post_interfaz121_tiempo_real(request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function (element) {
-                const sp_split = element.sp_cinterfaz121_fleettiempo_real.replace('(', '').replace(')', '').split(',');
+                /*const sp_split = element.sp_cinterfaz121_fleettiempo_real.replace('(', '').replace(')', '').split(',');
 
                 element.out_total = getCentavos(sp_split[0]);
                 element.out_efectivo = getCentavos(sp_split[1]);
@@ -268,7 +205,13 @@ export function post_interfaz121_tiempo_real(request, response) {
                 element.out_comision = getCentavos(sp_split[3]);
                 element.out_ganancia_final = getCentavos(sp_split[4]);
 
-                delete element.sp_cinterfaz121_fleettiempo_real;
+                delete element.sp_cinterfaz121_fleettiempo_real;*/
+
+                element.out_total = getCentavos(element.out_total);
+                element.out_efectivo = getCentavos(element.out_efectivo);
+                element.out_tarjeta = getCentavos(element.out_tarjeta);
+                element.out_comision = getCentavos(element.out_comision);
+                element.out_ganancia_final = getCentavos(element.out_ganancia_final);
             });
 
             try {
@@ -332,7 +275,7 @@ export function post_interfaz124_socio_conductor(request, response) {
     pool.query(
         query, (error, results) => {
             results.rows.forEach(function(element){
-                const sp_split = element.sp_cinterfaz75_mibilletera.replace('(', '').replace(')', '').split(',');
+                /*const sp_split = element.sp_cinterfaz75_mibilletera.replace('(', '').replace(')', '').split(',');
 
                 element.tarjeta_gan = getCentavos(sp_split[0]);
                 element.efectivo_gan = getCentavos(sp_split[1]);
@@ -341,15 +284,15 @@ export function post_interfaz124_socio_conductor(request, response) {
                 element.total_gan_dia = getCentavos(sp_split[4]);
                 element.cuota_plat_r = getCentavos(sp_split[5]);
                 element.cuota_socio_r = getCentavos(sp_split[6]);
-                element.rango_fechas = getRangeDate(sp_split[7]);
+                element.rango_fechas = getRangeDate2(sp_split[7]);
                 element.cant_servicios = sp_split[8];
                 element.ganancia_final = getCentavos(sp_split[9]);
                 element.out_adeudo_plataforma_efec = getCentavos(sp_split[10]);
                 element.out_adeudo_socio_efec = getCentavos(sp_split[11]);
 
-                delete element.sp_cinterfaz75_mibilletera;
+                delete element.sp_cinterfaz75_mibilletera;*/
 
-                /*element.tarjeta_gan = getCentavos(element.tarjeta_gan);
+                element.tarjeta_gan = getCentavos(element.tarjeta_gan);
                 element.efectivo_gan = getCentavos(element.efectivo_gan);
                 element.externo_gan = getCentavos(element.externo_gan);
                 element.total_gan = getCentavos(element.total_gan);
@@ -357,9 +300,10 @@ export function post_interfaz124_socio_conductor(request, response) {
                 element.cuota_plat_r = getCentavos(element.cuota_plat_r);
                 element.cuota_socio_r = getCentavos(element.cuota_socio_r);
                 element.rango_fechas = getDate(element.rango_fechas);
+                element.cant_servicios = element.cant_servicios.toString();
                 element.ganancia_final = getCentavos(element.ganancia_final);
                 element.out_adeudo_plataforma_efec = getCentavos(element.out_adeudo_plataforma_efec);
-                element.out_adeudo_socio_efec = getCentavos(element.out_adeudo_socio_efec);*/
+                element.out_adeudo_socio_efec = getCentavos(element.out_adeudo_socio_efec);
             });
             try {
                 // Call back pata encriptar cada elemento de la respuesta para envío1
@@ -430,12 +374,14 @@ export function post_interfaz126_socio_no_conductor(request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function(element){
-                const sp_split = element.interfaz126fleethome2.replace('\"','').split(',');
+                /*const sp_split = element.interfaz126fleethome2.replace('\"','').split(',');
 
                 element.out_info_vehiculo = sp_split[0].replace('\"','').replace('(','');
                 element.out_ganancia_propietario = getCentavos(sp_split[1].replace(')',''));
 
-                delete element.interfaz126fleethome2;
+                delete element.interfaz126fleethome2;*/
+
+                element.ganancia_propietario = getCentavos(element.ganancia_propietario);
             });
 
             try {
@@ -444,8 +390,8 @@ export function post_interfaz126_socio_no_conductor(request, response) {
                 if (encrypt) {
                     setTimeout(function () {
                         results.rows.forEach(function (element) {
-                            element.out_info_vehiculo != null ? element.out_info_vehiculo = aes256.encrypt(key, element.out_info_vehiculo.toString()) : element.out_info_vehiculo = element.out_info_vehiculo;
-                            element.out_ganancia_propietario != null ? element.out_ganancia_propietario = aes256.encrypt(key, element.out_ganancia_propietario.toString()) : element.out_ganancia_propietario = element.out_ganancia_propietario;
+                            element.info_vehiculo != null ? element.info_vehiculo = aes256.encrypt(key, element.info_vehiculo.toString()) : element.info_vehiculo = element.info_vehiculo;
+                            element.ganancia_propietario != null ? element.ganancia_propietario = aes256.encrypt(key, element.ganancia_propietario.toString()) : element.ganancia_propietario = element.ganancia_propietario;
                             element.encrypt = true;
                         });
                         resultado.data = results.rows;

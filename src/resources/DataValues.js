@@ -164,8 +164,8 @@ export function getMonthNumber(mes) {
 export function getDateHour(date){
     console.log(date);
     const fech_aux = date;
-    const fech_split = fech_aux.split(' ');
-    //const fech_split = fech_aux.split('T');
+    //const fech_split = fech_aux.split(' ');
+    const fech_split = fech_aux.split('T');
     const fecha_completa = fech_split[0];
     const hora_completa = fech_split[1];
     const fecha_completa_split = fecha_completa.split("-");
