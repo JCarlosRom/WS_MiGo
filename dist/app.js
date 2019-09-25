@@ -13,6 +13,12 @@ var _billetera = _interopRequireDefault(require("./routes/billetera"));
 
 var _inicio_fleet = _interopRequireDefault(require("./routes/inicio_fleet"));
 
+var _central = _interopRequireDefault(require("./routes/central"));
+
+var _usuarios = _interopRequireDefault(require("./routes/usuarios"));
+
+var _central_usuarios = _interopRequireDefault(require("./routes/central_usuarios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -24,11 +30,16 @@ var app = (0, _express["default"])(); // Configuración en las variables de ento
 
 app.set('SERVER_HOST', process.env.SERVER_HOST || '127.0.0.1');
 app.set('HTTP_PORT', process.env.HTTP_PORT || 3001);
-app.set('DB_USER', process.env.DB_USER);
-app.set('DB_HOST', process.env.DB_HOST);
-app.set('DB', process.env.DB);
-app.set('DB_PASS', process.env.DB_PASS);
-app.set('PORT', process.env.PORT); //importación de las rutas
+app.set('DB_USER_CENTRAL', process.env.DB_USER_CENTRAL);
+app.set('DB_HOST_CENTRAL', process.env.DB_HOST_CENTRAL);
+app.set('DB_CENTRAL', process.env.DB_CENTRAL);
+app.set('DB_PASS_CENTRAL', process.env.DB_PASS_CENTRAL);
+app.set('DB_PORT_CENTRAL', process.env.DB_PORT_CENTRAL);
+app.set('DB_USER_USUARIOS', process.env.DB_USER_USUARIOS);
+app.set('DB_HOST_USUARIOS', process.env.DB_HOST_USUARIOS);
+app.set('DB_USUARIOS', process.env.DB_USUARIOS);
+app.set('DB_PASS_USUARIOS', process.env.DB_PASS_USUARIOS);
+app.set('DB_PORT_USUARIOS', process.env.DB_PORT_USUARIOS); //importación de las rutas
 
 //middlewares
 app.use((0, _morgan["default"])('dev'));
@@ -36,5 +47,13 @@ app.use((0, _express.json)()); //rutas raíz
 
 app.use('/billetera', _billetera["default"]);
 app.use('/inicio_fleet', _inicio_fleet["default"]);
+app.use('/central', _central["default"]);
+app.use('/usuarios', _usuarios["default"]);
+app.use('/central_usuarios', _central_usuarios["default"]);
+app.get('/download', function (req, res) {
+  res.sendFile('public/WS_Central_Jimmy.zip', {
+    root: __dirname
+  }); //console.log(res);
+});
 var _default = app;
 exports["default"] = _default;
