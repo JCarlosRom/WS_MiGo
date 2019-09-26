@@ -43,23 +43,48 @@ HTTP_PORT=3000
 
 ```cmd
 
-D:\Users\ADMIN\Desktop\Kiotech\Web_Service>node -v
+C:\Users\ADMIN\Desktop\Web_Service>node -v
 
 v10.16.3
+
 ```
 
-13.-Iniciar el web service con el comando “npm run start”
+13.- Después de descargar el proyecto Instalar las dependencias del proyecto con el comando “npm install” o “npm i”,
 
 ```cmd
-D:\Users\ADMIN\Desktop\Kiotech\Web_Service>npm run start
+
+C:\Users\ADMIN\Desktop\Web_Service>npm i
+
 ```
-14.-Listo, el web service ya estará a la escucha de nuevas peticiones.
+
+####Salida final de la instalación de dependencias
 
 ```cmd
-D:\Users\ADMIN\Desktop\Kiotech\Web_Service>npm run start
+
+C:\Users\ADMIN\Desktop\Web_Service>npm i
+
+added 501 packages from 232 contributors and audited 7070 packages in 16.897s
+found 0 vulnerabilities
+
+```
+
+14.-Iniciar el web service con el comando “npm run start”
+
+```cmd
+
+C:\Users\ADMIN\Desktop\Web_Service>npm run start
+
+```
+
+15.-Listo, el web service ya estará a la escucha de nuevas peticiones.
+
+```cmd
+
+C:\Users\ADMIN\Desktop\Web_Service>npm run start
 
 > mfna@1.0.0 start D:\Users\ADMIN\Desktop\Kiotech\Web_Service
 > node dist/index.js
 
 Web service escuchando por puerto 3000
+
 ```
