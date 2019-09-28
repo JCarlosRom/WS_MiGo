@@ -31,12 +31,20 @@ https://nodejs.org/es/
 12.-Asignar las credenciales de acceso requeridas para acceder a la base de datos en el archivo .env
 
 ```.env
-DB_HOST=localhost
-DB_USER=postgres
-DB_PASS=12345
-DB=Migo_Central
-PORT=5432
-HTTP_PORT=3000
+DB_HOST_CENTRAL=localhost
+DB_USER_CENTRAL=postgres
+DB_PASS_CENTRAL=12345
+DB_CENTRAL=Migo_Central
+DB_PORT_CENTRAL=5432
+
+DB_HOST_USUARIOS=localhost
+DB_USER_USUARIOS=postgres
+DB_PASS_USUARIOS=12345
+DB_USUARIOS=Migo_Usuarios
+DB_PORT_USUARIOS=5432
+
+SERVER_HOST=localhost
+HTTP_PORT=3001
 ```
 
 12.-Checar la versión de node, esté instalada y sea la versión mínima estable 10.16.3
