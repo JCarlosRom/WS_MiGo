@@ -27,7 +27,7 @@ export function post_interfaz41_fleet_home(request, response) {
     valoresEntrada.id_usuario = id_usuario;
 
     // Query
-    var query = "select interfaz41FleetHome3('"+id_usuario+"')";
+    var query = "select * from interfaz41FleetHome3('"+id_usuario+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -108,30 +108,18 @@ export function post_interfaz42_fleet_home(request, response) {
     valoresEntrada.fecha_filtro = fecha_filtro;
 
     // Query
-    var query = "select interfaz41FleetHome3_Filtro('"+id_usuario+"','"+fecha_filtro+"')";
+    var query = "select * from interfaz41FleetHome3_Filtro('"+id_usuario+"','"+fecha_filtro+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
     pool.query(
         query, (error, results) => {
-
             results.rows.forEach(function (element) {
-                /*const sp_split = element.interfaz41fleethome3_filtro.replace('\"', '').replace('(', '').replace(')', '').split(',');
-
-                element.out_id_usuario = sp_split[0];
-                element.out_nombre = sp_split[1].replace('\"', '');
-                element.out_ganancia_semanal = getCentavos(sp_split[2]);
-                element.out_ganancia_actual = getCentavos(sp_split[3]);
-                element.out_numero_viajes = sp_split[4];
-                element.out_rango_fechas = getRangeDate(sp_split[5]);
-
-                delete element.interfaz41fleethome3_filtro;*/
-
                 element.id_chofer = element.id_chofer.toString();
                 element.ganancia_semanal = getCentavos(element.ganancia_semanal);
                 element.ganancia_actual = getCentavos(element.ganancia_actual);
                 element.numero_viajes_actual = element.numero_viajes_actual.toString();
-                element.rango_fechas = getRangeDate(element.rango_fechas);
+                element.rango_fechas != null ? element.rango_fechas = getRangeDate(element.rango_fechas) : element.rango_fechas = 'Sin registro';
             });
 
             try {
@@ -189,7 +177,7 @@ export function post_interfaz121_tiempo_real(request, response) {
     valoresEntrada.id_usuario = id_usuario;
 
     // Query
-    var query = "select sp_cinterfaz121_FleetTiempo_real('"+id_usuario+"')";
+    var query = "select * from sp_cinterfaz121_FleetTiempo_real('"+id_usuario+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -197,16 +185,6 @@ export function post_interfaz121_tiempo_real(request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function (element) {
-                /*const sp_split = element.sp_cinterfaz121_fleettiempo_real.replace('(', '').replace(')', '').split(',');
-
-                element.out_total = getCentavos(sp_split[0]);
-                element.out_efectivo = getCentavos(sp_split[1]);
-                element.out_tarjeta = getCentavos(sp_split[2]);
-                element.out_comision = getCentavos(sp_split[3]);
-                element.out_ganancia_final = getCentavos(sp_split[4]);
-
-                delete element.sp_cinterfaz121_fleettiempo_real;*/
-
                 element.out_total = getCentavos(element.out_total);
                 element.out_efectivo = getCentavos(element.out_efectivo);
                 element.out_tarjeta = getCentavos(element.out_tarjeta);
@@ -268,30 +246,13 @@ export function post_interfaz124_socio_conductor(request, response) {
     valoresEntrada.id_usuario = id_usuario;
 
     // Query
-    var query = "select sp_cinterfaz75_mibilletera('"+id_usuario+"')";
+    var query = "select * from sp_cinterfaz75_mibilletera('"+id_usuario+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
     pool.query(
         query, (error, results) => {
             results.rows.forEach(function(element){
-                /*const sp_split = element.sp_cinterfaz75_mibilletera.replace('(', '').replace(')', '').split(',');
-
-                element.tarjeta_gan = getCentavos(sp_split[0]);
-                element.efectivo_gan = getCentavos(sp_split[1]);
-                element.externo_gan = getCentavos(sp_split[2]);
-                element.total_gan = getCentavos(sp_split[3]);
-                element.total_gan_dia = getCentavos(sp_split[4]);
-                element.cuota_plat_r = getCentavos(sp_split[5]);
-                element.cuota_socio_r = getCentavos(sp_split[6]);
-                element.rango_fechas = getRangeDate2(sp_split[7]);
-                element.cant_servicios = sp_split[8];
-                element.ganancia_final = getCentavos(sp_split[9]);
-                element.out_adeudo_plataforma_efec = getCentavos(sp_split[10]);
-                element.out_adeudo_socio_efec = getCentavos(sp_split[11]);
-
-                delete element.sp_cinterfaz75_mibilletera;*/
-
                 element.tarjeta_gan = getCentavos(element.tarjeta_gan);
                 element.efectivo_gan = getCentavos(element.efectivo_gan);
                 element.externo_gan = getCentavos(element.externo_gan);
@@ -299,7 +260,7 @@ export function post_interfaz124_socio_conductor(request, response) {
                 element.total_gan_dia = getCentavos(element.total_gan_dia);
                 element.cuota_plat_r = getCentavos(element.cuota_plat_r);
                 element.cuota_socio_r = getCentavos(element.cuota_socio_r);
-                element.rango_fechas = getDate(element.rango_fechas);
+                element.rango_fechas = getRangeDate(element.rango_fechas);
                 element.cant_servicios = element.cant_servicios.toString();
                 element.ganancia_final = getCentavos(element.ganancia_final);
                 element.out_adeudo_plataforma_efec = getCentavos(element.out_adeudo_plataforma_efec);
@@ -366,7 +327,7 @@ export function post_interfaz126_socio_no_conductor(request, response) {
     valoresEntrada.id_usuario = id_usuario;
 
     // Query
-    var query = "select interfaz126fleethome2('"+id_usuario+"')";
+    var query = "select * from interfaz126fleethome2('"+id_usuario+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -374,13 +335,6 @@ export function post_interfaz126_socio_no_conductor(request, response) {
         query, (error, results) => {
 
             results.rows.forEach(function(element){
-                /*const sp_split = element.interfaz126fleethome2.replace('\"','').split(',');
-
-                element.out_info_vehiculo = sp_split[0].replace('\"','').replace('(','');
-                element.out_ganancia_propietario = getCentavos(sp_split[1].replace(')',''));
-
-                delete element.interfaz126fleethome2;*/
-
                 element.ganancia_propietario = getCentavos(element.ganancia_propietario);
             });
 

@@ -66,6 +66,7 @@ function getThisDate(date) {
 
 
 function getRangeDate(date) {
+  console.log(date);
   var split_fechas = date.split('-');
   var primer_mes = split_fechas[1];
   var primer_dia = split_fechas[2];
@@ -86,7 +87,8 @@ function getRangeDate(date) {
 
 
 function getRangeDate2(date) {
-  var split_fechas = date.split('-');
+  var fecha_aux = date.toString();
+  var split_fechas = fecha_aux.split('-');
   var primer_mes = split_fechas[1];
   var primer_dia = split_fechas[2];
   var segundo_mes = split_fechas[4];
@@ -203,8 +205,7 @@ function getMonthNumber(mes) {
 
 
 function getDateHour(date) {
-  console.log(date);
-  var fech_aux = date; //const fech_split = fech_aux.split(' ');
+  var fech_aux = date.toString(); //const fech_split = fech_aux.split(' ');
 
   var fech_split = fech_aux.split('T');
   var fecha_completa = fech_split[0];
@@ -226,7 +227,9 @@ function getDateHour(date) {
 
 
 function getDateHourFullDate(date) {
-  var split_fecha = date.split(' ');
+  var fecha_aux = date.toString();
+  console.log(fecha_aux);
+  var split_fecha = fecha_aux.split(' ');
   var mes_final = getMonthNumber(split_fecha[1]);
   var dia_final = split_fecha[2];
   var fecha_final = dia_final + '/' + mes_final;

@@ -32,7 +32,7 @@ function postsp_cinterfaz98_AgregarTarjeta(request, response) {
   valoresEntrada.fecha_vigencia = fecha_vigencia;
   valoresEntrada.ccv = ccv; // Query
 
-  var query = "select interfaz98AgregarTarjeta('" + id_usuario + "'," + numero_tarjeta + ",'" + fecha_vigencia + "'," + ccv + ")"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz98AgregarTarjeta('" + id_usuario + "'," + numero_tarjeta + ",'" + fecha_vigencia + "'," + ccv + ")"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -98,7 +98,7 @@ function postsp_cinterfaz98_UpdateDeleteTarjeta(request, response) {
   valoresEntrada.action = action; //Action 0 update, Action 1 delete
   // Query
 
-  var query = "select interfaz106ActualizaTarjeta(" + id_usuario + "," + numero_tarjeta + ",'" + fecha_vigencia + "'," + ccv + ",'" + last4_digit + "'," + action + ")"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz106ActualizaTarjeta(" + id_usuario + "," + numero_tarjeta + ",'" + fecha_vigencia + "'," + ccv + ",'" + last4_digit + "'," + action + ")"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -152,7 +152,7 @@ function postsp_cinterfaz105_MetodoPagoVerTarjetas(request, response) {
   var id_usuario = request.body.id_usuario;
   valoresEntrada.id_usuario = id_usuario; // Query
 
-  var query = "select interfaz105MetodoPago(" + id_usuario + ")"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz105MetodoPago(" + id_usuario + ")"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -206,7 +206,7 @@ function postsp_cinterfaz108_109Usuarios(request, response) {
   var id_usuario = request.body.id_usuario;
   valoresEntrada.id_usuario = id_usuario; // Query
 
-  var query = "select interfaz108_109Usuario(" + id_usuario + ")"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz108_109Usuario(" + id_usuario + ")"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
   pool.query(query, function (error, results) {

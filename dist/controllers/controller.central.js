@@ -29,7 +29,7 @@ function postsp_CInterfaz36_notificaciones(request, response) {
   var id_chofer = request.body.id_chofer;
   valoresEntrada.id_chofer = id_chofer; // Query
 
-  var query = "select sp_cinterfaz36_notificaciones('" + id_chofer + "')"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from sp_cinterfaz36_notificaciones('" + id_chofer + "')"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -88,7 +88,7 @@ function postsp_cinterfaz101_CalificacionConductorPasajero(request, response) {
   valoresEntrada.calificacion = calificacion;
   valoresEntrada.comentario_conductor = comentario_conductor; // Query
 
-  var query = "select interfaz101CalificacionConductor_Usuario(" + id_servicio + "," + calificacion + ",'" + comentario_conductor + "')"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz101CalificacionConductor_Usuario(" + id_servicio + "," + calificacion + ",'" + comentario_conductor + "')"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -142,7 +142,7 @@ function postsp_cinterfaz104_VerCupones(request, response) {
   var id_usuario = request.body.id_usuario;
   valoresEntrada.id_usuario = id_usuario; // Query
 
-  var query = "select interfaz104MisCupones('" + id_usuario + "')"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz104MisCupones('" + id_usuario + "')"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -217,7 +217,7 @@ function postsp_cinterfaz132_RegistroFacturacion(request, response) {
   valoresEntrada.localidad = localidad;
   valoresEntrada.entidad_federativa = entidad_federativa; // Query
 
-  var query = "select interfaz132Facturacion(" + id_usuario + ",'" + rfc + "','" + razon_social + "','" + nombre_vialidad + "','" + colonia + "','" + numero_interior + "','" + numero_exterior + "','" + codigo_postal + "','" + municipio + "','" + localidad + "','" + entidad_federativa + "')"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz132Facturacion(" + id_usuario + ",'" + rfc + "','" + razon_social + "','" + nombre_vialidad + "','" + colonia + "','" + numero_interior + "','" + numero_exterior + "','" + codigo_postal + "','" + municipio + "','" + localidad + "','" + entidad_federativa + "')"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -278,7 +278,7 @@ function postsp_cinterfaz195_CalificacionPasajeroConductor(request, response) {
   valoresEntrada.comentario_usuario = comentario_usuario;
   valoresEntrada.reconocimiento = reconocimiento; // Query
 
-  var query = "select interfaz195CalificacionUsuario_Conductor(" + id_servicio + "," + calificacion + ",'" + comentario_usuario + "'," + reconocimiento + ")"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz195CalificacionUsuario_Conductor(" + id_servicio + "," + calificacion + ",'" + comentario_usuario + "'," + reconocimiento + ")"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -332,7 +332,7 @@ function postsp_cinterfaz204MostrarDestinosFavoritos(request, response) {
   var id_usuario = request.body.id_usuario;
   valoresEntrada.id_usuario = id_usuario; // Query
 
-  var query = "select interfaz204MostrarDestinosFavoritos('" + id_usuario + "')"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz204MostrarDestinosFavoritos('" + id_usuario + "')"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -393,7 +393,7 @@ function postsp_cinterfaz207AgregarDestinosFavoritos(request, response) {
   valoresEntrada.direccion_destino = direccion_destino;
   valoresEntrada.coordenadas = coordenadas; // Query
 
-  var query = "select interfaz207AgregarDestinosFavoritos('" + id_usuario + "','" + nombre_destino + "','" + direccion_destino + "','" + coordenadas + "')"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz207AgregarDestinosFavoritos('" + id_usuario + "','" + nombre_destino + "','" + direccion_destino + "','" + coordenadas + "')"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -447,7 +447,7 @@ function postsp_cinterfaz111Usuarios(request, response) {
   var id_servicio = request.body.id_servicio.id_servicio;
   valoresEntrada.id_servicio = id_servicio; // Query
 
-  var query = "select interfaz111Usuario(" + id_servicio + ")"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz111Usuario(" + id_servicio + ")"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -502,7 +502,7 @@ function postsp_cinterfaz164UsuarioCalculoPrecios(request, response) {
   valoresEntrada.distancia_km = distancia_km;
   valoresEntrada.tiempo_min = tiempo_min; // Query
 
-  var query = "select interfaz164Usuarios(" + distancia_km + "," + tiempo_min + ")"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz164Usuarios(" + distancia_km + "," + tiempo_min + ")"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 

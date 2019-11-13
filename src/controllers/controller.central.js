@@ -16,7 +16,7 @@ export function postsp_CInterfaz36_notificaciones(request, response) {
     valoresEntrada.id_chofer = id_chofer;
 
     // Query
-    var query = "select sp_cinterfaz36_notificaciones('"+id_chofer+"')";
+    var query = "select * from sp_cinterfaz36_notificaciones('"+id_chofer+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -71,7 +71,7 @@ export function postsp_cinterfaz101_CalificacionConductorPasajero(request, respo
     valoresEntrada.comentario_conductor = comentario_conductor;
 
     // Query
-    var query = "select interfaz101CalificacionConductor_Usuario("+id_servicio+","+calificacion+",'"+comentario_conductor+"')";
+    var query = "select * from interfaz101CalificacionConductor_Usuario("+id_servicio+","+calificacion+",'"+comentario_conductor+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -124,7 +124,7 @@ export function postsp_cinterfaz104_VerCupones(request, response) {
     valoresEntrada.id_usuario = id_usuario;
 
     // Query
-    var query = "select interfaz104MisCupones('"+id_usuario+"')";
+    var query = "select * from interfaz104MisCupones('"+id_usuario+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -200,7 +200,7 @@ export function postsp_cinterfaz132_RegistroFacturacion (request, response) {
     valoresEntrada.entidad_federativa = entidad_federativa;
 
     // Query
-    var query = "select interfaz132Facturacion("+id_usuario+",'"+rfc+"','"+razon_social+"','"+nombre_vialidad+"','"+colonia+"','"+numero_interior+"','"+numero_exterior+"','"+codigo_postal+"','"+municipio+"','"+localidad+"','"+entidad_federativa+"')";
+    var query = "select * from interfaz132Facturacion("+id_usuario+",'"+rfc+"','"+razon_social+"','"+nombre_vialidad+"','"+colonia+"','"+numero_interior+"','"+numero_exterior+"','"+codigo_postal+"','"+municipio+"','"+localidad+"','"+entidad_federativa+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -262,7 +262,7 @@ export function postsp_cinterfaz195_CalificacionPasajeroConductor(request, respo
     valoresEntrada.reconocimiento = reconocimiento;
 
     // Query
-    var query = "select interfaz195CalificacionUsuario_Conductor("+id_servicio+","+calificacion+",'"+comentario_usuario+"',"+reconocimiento+")";
+    var query = "select * from interfaz195CalificacionUsuario_Conductor("+id_servicio+","+calificacion+",'"+comentario_usuario+"',"+reconocimiento+")";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -315,7 +315,7 @@ export function postsp_cinterfaz204MostrarDestinosFavoritos(request, response) {
     valoresEntrada.id_usuario = id_usuario;
 
     // Query
-    var query = "select interfaz204MostrarDestinosFavoritos('"+id_usuario+"')";
+    var query = "select * from interfaz204MostrarDestinosFavoritos('"+id_usuario+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -377,7 +377,7 @@ export function postsp_cinterfaz207AgregarDestinosFavoritos(request, response) {
     valoresEntrada.coordenadas = coordenadas;
 
     // Query
-    var query = "select interfaz207AgregarDestinosFavoritos('"+id_usuario+"','"+nombre_destino+"','"+direccion_destino+"','"+coordenadas+"')";
+    var query = "select * from interfaz207AgregarDestinosFavoritos('"+id_usuario+"','"+nombre_destino+"','"+direccion_destino+"','"+coordenadas+"')";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -430,7 +430,7 @@ export function postsp_cinterfaz111Usuarios(request, response) {
     valoresEntrada.id_servicio = id_servicio;
 
     // Query
-    var query = "select interfaz111Usuario("+id_servicio+")";
+    var query = "select * from interfaz111Usuario("+id_servicio+")";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -483,7 +483,7 @@ export function postsp_cinterfaz164UsuarioCalculoPrecios(request, response) {
     valoresEntrada.tiempo_min = tiempo_min;
 
     // Query
-    var query = "select interfaz164Usuarios("+distancia_km+","+tiempo_min+")";
+    var query = "select * from interfaz164Usuarios("+distancia_km+","+tiempo_min+")";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 

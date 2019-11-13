@@ -47,6 +47,7 @@ export function getThisDate(date){
  * @returns
  */
 export function getRangeDate(date){
+    console.log(date);
     let split_fechas = date.split('-');
     let primer_mes = split_fechas[1];
     let primer_dia = split_fechas[2];
@@ -68,7 +69,8 @@ export function getRangeDate(date){
  * @returns
  */
 export function getRangeDate2(date){
-    let split_fechas = date.split('-');
+    let fecha_aux = date.toString();
+    let split_fechas = fecha_aux.split('-');
     let primer_mes = split_fechas[1];
     let primer_dia = split_fechas[2];
     let segundo_mes = split_fechas[4];
@@ -162,8 +164,7 @@ export function getMonthNumber(mes) {
  * @returns
  */
 export function getDateHour(date){
-    console.log(date);
-    const fech_aux = date;
+    const fech_aux = date.toString();
     //const fech_split = fech_aux.split(' ');
     const fech_split = fech_aux.split('T');
     const fecha_completa = fech_split[0];
@@ -186,7 +187,9 @@ export function getDateHour(date){
  * @returns
  */
 export function getDateHourFullDate(date){
-    const split_fecha = date.split(' ');
+    const fecha_aux = date.toString();
+    console.log(fecha_aux);
+    const split_fecha = fecha_aux.split(' ');
     const mes_final = getMonthNumber(split_fecha[1]);
     const dia_final = split_fecha[2];
     const fecha_final = dia_final + '/' + mes_final;

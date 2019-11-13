@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/index.js --exec babel-node",
     "build": "babel src --out-dir dist",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "start-dev":"nodemon dist/index.js"
   },
   "keywords": [
     "webservice",
@@ -16,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
+    "socket.io": "^2.3.0",
     "aes256": "^1.0.4",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",

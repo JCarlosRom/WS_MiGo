@@ -24,7 +24,7 @@ function postsp_cinterfaz112MejoresComentariosUsuarios(request, response) {
   var id_conductor = request.body.id_conductor;
   valoresEntrada.id_conductor = id_conductor; // Query
 
-  var query = "select interfaz112_MejoresComentariosUsuario('" + id_conductor + "')"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz112_MejoresComentariosUsuario('" + id_conductor + "')"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -78,7 +78,7 @@ function postsp_cinterfaz112LogrosUsuarios(request, response) {
   var id_conductor = request.body.id_conductor;
   valoresEntrada.id_conductor = id_conductor; // Query
 
-  var query = "select interfaz112_logrosusuario('" + id_conductor + "')"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz112_logrosusuario('" + id_conductor + "')"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 
@@ -132,7 +132,7 @@ function postsp_cinterfaz112DatosUsuarios(request, response) {
   var id_conductor = request.body.id_conductor;
   valoresEntrada.id_conductor = id_conductor; // Query
 
-  var query = "select interfaz112_DatosUsuario('" + id_conductor + "')"; // Se reemplaza las comillas doble por simples para la consulta
+  var query = "select * from interfaz112_DatosUsuario('" + id_conductor + "')"; // Se reemplaza las comillas doble por simples para la consulta
 
   query = query.replace(/["]+/g, '');
 

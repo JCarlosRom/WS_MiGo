@@ -20,7 +20,7 @@ export function postsp_cinterfaz98_AgregarTarjeta(request, response) {
     valoresEntrada.ccv =ccv;
 
     // Query
-    var query = "select interfaz98AgregarTarjeta('"+id_usuario+"',"+numero_tarjeta+",'"+fecha_vigencia+"',"+ccv+")";
+    var query = "select * from interfaz98AgregarTarjeta('"+id_usuario+"',"+numero_tarjeta+",'"+fecha_vigencia+"',"+ccv+")";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -78,7 +78,7 @@ export function postsp_cinterfaz98_UpdateDeleteTarjeta(request, response){
     valoresEntrada.action=action;//Action 0 update, Action 1 delete
 
     // Query
-    var query = "select interfaz106ActualizaTarjeta("+id_usuario+","+numero_tarjeta+",'"+fecha_vigencia+"',"+ccv+",'"+last4_digit+"',"+action+")";
+    var query = "select * from interfaz106ActualizaTarjeta("+id_usuario+","+numero_tarjeta+",'"+fecha_vigencia+"',"+ccv+",'"+last4_digit+"',"+action+")";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -131,7 +131,7 @@ export function postsp_cinterfaz105_MetodoPagoVerTarjetas(request, response) {
     valoresEntrada.id_usuario = id_usuario;
 
     // Query
-    var query = "select interfaz105MetodoPago("+id_usuario+")";
+    var query = "select * from interfaz105MetodoPago("+id_usuario+")";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
@@ -184,7 +184,7 @@ export function postsp_cinterfaz108_109Usuarios(request, response) {
     valoresEntrada.id_usuario = id_usuario;
 
     // Query
-    var query = "select interfaz108_109Usuario("+id_usuario+")";
+    var query = "select * from interfaz108_109Usuario("+id_usuario+")";
     // Se reemplaza las comillas doble por simples para la consulta
     query = query.replace(/["]+/g, '');
 
